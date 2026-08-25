@@ -52,6 +52,15 @@ uploaded = st.sidebar.file_uploader("Load JSON file", type=["json"])
 
 if uploaded is None:
     st.info("Upload a JSON file to start.")
+   
+with st.expander(
+    "Instructions for Creating Seasonal Road Closure JSON Files",
+    expanded=False,
+):
+    st.markdown("""
+    ...
+    """)
+    
     st.stop()
 
 data = json.load(uploaded)
