@@ -58,7 +58,162 @@ with st.expander(
     expanded=False,
 ):
     st.markdown("""
-    ...
+    Purpose
+
+Use the prompt below to create a downloadable JSON file containing roads that are regularly closed during winter or another recurring season.
+
+The resulting file must be compatible with the road closure application and must follow the required schema exactly.
+
+Ready-to-use prompt
+
+Replace [COUNTRY] with the required country name.
+
+Search the internet thoroughly for roads in [COUNTRY] that are regularly closed during winter or another recurring season.
+ 
+Focus on confirmed recurring seasonal closures, including:
+ 
+- mountain roads and mountain passes;
+- scenic roads;
+- roads in national and provincial parks;
+- remote regional roads;
+- roads closed because of snow, avalanche risk, wildlife protection, winter maintenance limitations, or seasonal border operations;
+- private or toll roads only if they are open to public motor traffic during the operating season.
+ 
+Use current and reliable sources. Prioritize:
+ 
+1. official national road authorities;
+2. official regional or provincial road authorities;
+3. national park authorities;
+4. local government websites;
+5. official tourism organizations;
+6. reliable traffic information services.
+ 
+Do not include:
+ 
+- roads closed only because of temporary construction;
+- roads affected only by short-term weather events;
+- permanently closed roads;
+- hiking trails;
+- cycling-only routes;
+- roads that are open throughout the year but may occasionally close during storms;
+- unverified locations;
+- duplicate sections of the same road, unless the sections have different seasonal closure schedules.
+ 
+Create a downloadable JSON file using exactly the following structure:
+ 
+{
+"records": [
+{
+"name": "Location or road section name",
+"road": "Official road number or road name",
+"coordinates": "latitude, longitude",
+"status": "open",
+"estimated_closing_time": "October",
+"estimated_opening_time": "May"
+}
+]
+}
+ 
+Follow these data rules exactly:
+ 
+1. The root object must contain one field named "records".
+2. "records" must be an array.
+3. Every record must contain exactly these six fields:
+- "name"
+- "road"
+- "coordinates"
+- "status"
+- "estimated_closing_time"
+- "estimated_opening_time"
+4. Do not add fields such as "note", "source", "country", "region", "id", or "description".
+5. All field names and values must be written in English, except official place names and official road names.
+6. Coordinates must use the format:
+"latitude, longitude"
+7. Use decimal degrees with a period as the decimal separator.
+8. Use the coordinates of a representative point on the seasonally closed road section, mountain pass, or closure gate.
+9. Do not invent coordinates. Verify them using reliable maps or official geographic information.
+10. If coordinates cannot be verified reliably, use:
+"coordinates": null
+11. The "status" field must represent the expected or confirmed status on the date when the file is created.
+12. Use only:
+"status": "open"
+or:
+"status": "closed"
+13. Do not automatically set every road to "closed" merely because it is seasonally closed in winter.
+14. If the file is created during the normal summer operating season, roads should normally have "status": "open", unless a current reliable source confirms that a road remains closed.
+15. If the file is created during the normal winter closure season, use "status": "closed" when the seasonal schedule or current traffic information confirms the closure.
+16. Check the current date before assigning the status.
+17. The "estimated_closing_time" field means the month in which the road normally closes. It does not mean the entire period during which the road remains closed.
+18. The "estimated_opening_time" field means the month in which the road normally reopens.
+19. Time fields may contain only English month names.
+20. If the exact month is uncertain, a maximum of two consecutive months may be used, for example:
+"October–November"
+"May–June"
+21. Use an en dash between two months.
+22. Do not use terms such as:
+- early May
+- mid-May
+- late May
+- spring
+- summer
+- winter
+- weather dependent
+- variable
+- unknown
+23. Valid examples include:
+"estimated_closing_time": "October"
+"estimated_closing_time": "October–November"
+"estimated_opening_time": "May"
+"estimated_opening_time": "May–June"
+24. Do not represent the full closure period as:
+"estimated_closing_time": "October–May"
+25. Before creating the file, verify every record against at least one reliable source.
+26. Use at least two independent sources for uncertain dates, road numbers, coordinates, or seasonal status whenever possible.
+27. Prefer official information if sources conflict.
+28. Remove records that cannot be verified with sufficient confidence.
+29. Avoid duplicate records based on the combination of "name" and "road".
+30. Use the official road number that applies to the seasonally closed section. Do not use an outdated road number if a current one can be verified.
+ 
+Before returning the file, perform the following validation:
+ 
+- validate the JSON syntax;
+- confirm that the file contains a root object with a "records" array;
+- confirm that every record has exactly the six required fields;
+- confirm that every status is either "open" or "closed";
+- confirm that every time value contains only one English month or two English months separated by an en dash;
+- confirm that no value contains "early", "mid", "late", "spring", "summer", "winter", "variable", or a full closure period;
+- confirm that coordinates are valid decimal coordinates or null;
+- confirm that there are no duplicate records;
+- confirm that the status is appropriate for the current date;
+- confirm that the file is not empty.
+ 
+Save the completed file as:
+ 
+[COUNTRY]_seasonal_closures.json
+ 
+Provide the completed JSON as a directly downloadable file. Do not return only a JSON code block.
+ 
+After creating the file, briefly report:
+ 
+- the total number of records;
+- the number of records marked "open";
+- the number of records marked "closed";
+- the main official sources used;
+- any records for which coordinates or dates are approximate.
+
+Expected JSON format
+{
+"records": [
+{
+"name": "Example Mountain Road",
+"road": "Road F123",
+"coordinates": "64.123456, -18.123456",
+"status": "open",
+"estimated_closing_time": "October–November",
+"estimated_opening_time": "May–June"
+}
+]
+}
     """)
     
     st.stop()
