@@ -204,15 +204,15 @@ After creating the file, briefly report:
 Expected JSON format
 {
 "records": [
-{
-"name": "Example Mountain Road",
-"road": "Road F123",
-"coordinates": "64.123456, -18.123456",
-"status": "open",
-"estimated_closing_time": "October–November",
-"estimated_opening_time": "May–June"
-}
-]
+    {
+    "name": "Example Mountain Road",
+    "road": "Road F123",
+    "coordinates": "64.123456, -18.123456",
+    "status": "open",
+    "estimated_closing_time": "October–November",
+    "estimated_opening_time": "May–June"
+    }
+    ]
 }
     """)
     
