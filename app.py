@@ -200,20 +200,6 @@ After creating the file, briefly report:
 - the number of records marked "closed";
 - the main official sources used;
 - any records for which coordinates or dates are approximate.
-
-Expected JSON format
-{
-"records": [
-    {
-    "name": "Example Mountain Road",
-    "road": "Road F123",
-    "coordinates": "64.123456, -18.123456",
-    "status": "open",
-    "estimated_closing_time": "October–November",
-    "estimated_opening_time": "May–June"
-    }
-    ]
-}
     """)
     
     st.stop()
