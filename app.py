@@ -50,7 +50,7 @@ MAP_STATUS_COLORS = {
 st.sidebar.title("Data Source")
 uploaded = st.sidebar.file_uploader("Load JSON file", type=["json"])
 
-with st.expander(
+with st.sidebar.expander(
     "Instructions for Creating Seasonal Road Closure JSON Files",
     expanded=False,
 ):
