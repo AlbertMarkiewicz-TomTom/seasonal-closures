@@ -50,10 +50,6 @@ MAP_STATUS_COLORS = {
 st.sidebar.title("Data Source")
 uploaded = st.sidebar.file_uploader("Load JSON file", type=["json"])
 
-if uploaded is None:
-    st.info("Upload a JSON file to start.")
-    st.stop()
-   
 with st.expander(
     "Instructions for Creating Seasonal Road Closure JSON Files",
     expanded=False,
@@ -202,7 +198,10 @@ After creating the file, briefly report:
 - the main official sources used;
 - any records for which coordinates or dates are approximate.
     """)
-    
+
+if uploaded is None:
+    st.info("Upload a JSON file to start.")
+    st.stop()
 
 data = json.load(uploaded)
 country = "Seasonal Closures Dashboard"
