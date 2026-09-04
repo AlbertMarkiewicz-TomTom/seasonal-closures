@@ -52,6 +52,7 @@ uploaded = st.sidebar.file_uploader("Load JSON file", type=["json"])
 
 if uploaded is None:
     st.info("Upload a JSON file to start.")
+    st.stop()
    
 with st.expander(
     "Instructions for Creating Seasonal Road Closure JSON Files",
@@ -202,7 +203,6 @@ After creating the file, briefly report:
 - any records for which coordinates or dates are approximate.
     """)
     
-    st.stop()
 
 data = json.load(uploaded)
 country = "Seasonal Closures Dashboard"
