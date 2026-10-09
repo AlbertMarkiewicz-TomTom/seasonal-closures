@@ -116,13 +116,14 @@ Follow these data rules exactly:
  
 1. The root object must contain one field named "records".
 2. "records" must be an array.
-3. Every record must contain exactly these six fields:
+3. Every record must contain exactly these seven fields:
 - "name"
 - "road"
 - "coordinates"
 - "status"
 - "estimated_closing_time"
 - "estimated_opening_time"
+- "source_url"
 4. Do not add fields such as "note", "source", "country", "region", "id", or "description".
 5. All field names and values must be written in English, except official place names and official road names.
 6. Coordinates must use the format:
@@ -171,12 +172,30 @@ or:
 28. Remove records that cannot be verified with sufficient confidence.
 29. Avoid duplicate records based on the combination of "name" and "road".
 30. Use the official road number that applies to the seasonally closed section. Do not use an outdated road number if a current one can be verified.
- 
+31. Every record must contain a field named "source_url".
+32. "source_url" must contain the direct URL of the primary source used to verify the record.
+33. Prefer official sources whenever available.
+34. Use the most specific source possible:
+- official road authority page for that road;
+- official park authority page;
+- official traffic information page;
+- official regional authority page.
+35. Do not use URLs pointing only to generic search engines.
+36. Do not use shortened URLs.
+37. The URL must start with:
+https://
+38. Verify that every URL is valid and publicly accessible.
+39. If multiple sources were used, store the most authoritative source in "source_url".
+40. Every road record must have its own source_url value.
+
 Before returning the file, perform the following validation:
  
 - validate the JSON syntax;
 - confirm that the file contains a root object with a "records" array;
-- confirm that every record has exactly the six required fields;
+- confirm that every record has exactly the seven required fields;
+- confirm that every record contains a valid "source_url";
+- confirm that every source_url starts with "https://";
+- confirm that no source_url is empty;
 - confirm that every status is either "open" or "closed";
 - confirm that every time value contains only one English month or two English months separated by an en dash;
 - confirm that no value contains "early", "mid", "late", "spring", "summer", "winter", "variable", or a full closure period;
