@@ -350,12 +350,13 @@ with map_tab:
             status = str(r.get("current_status", "")).lower()
             color = MAP_STATUS_COLORS.get(status, "#999999")
 
-            popup = (
-                f"<b>{r.get('name', '')}</b><br>"
-                f"Road: {r.get('road', '')}<br>"
-                f"Status: {status}<br>"
-                f"Coordinates: {r['lat']:.6f}, {r['lon']:.6f}"
-            )
+           popup = (
+    f"<b>{r.get('name', '')}</b><br>"
+    f"Road: {r.get('road', '')}<br>"
+    f"Status: {status}<br>"
+    f"Coordinates: {r['lat']:.6f}, {r['lon']:.6f}<br>"
+    f'<a href="{r.get("source_url","")}" target="_blank">Source</a>'
+)
 
             folium.CircleMarker(
                 location=[r["lat"], r["lon"]],
@@ -372,7 +373,19 @@ with map_tab:
     else:
         st.warning("No valid coordinates available for the selected records.")
 
-    st.data_editor(filtered, use_container_width=True, disabled=True, hide_index=True)
+    st.data_editor(
+    filtered,
+    use_container_width=True,
+    disabled=True,
+    hide_index=True,
+    column_config={
+        "source_url": st.column_config.LinkColumn(
+            "Source",
+            help="Open source website",
+            display_text="Open"
+        )
+    }
+)
 
 with timeline_tab:
     st.markdown("### Color legend")
