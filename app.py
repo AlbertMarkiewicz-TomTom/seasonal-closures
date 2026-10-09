@@ -356,7 +356,7 @@ with map_tab:
             f"Status: {status}<br>"
             f"Coordinates: {r['lat']:.6f}, {r['lon']:.6f}<br>"
             f'<a href="{r.get("source_url","")}" target="_blank">Source</a>'
-)
+            )
 
             folium.CircleMarker(
                 location=[r["lat"], r["lon"]],
