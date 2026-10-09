@@ -101,12 +101,13 @@ Create a downloadable JSON file using exactly the following structure:
 {
 "records": [
 {
-"name": "Location or road section name",
-"road": "Official road number or road name",
-"coordinates": "latitude, longitude",
-"status": "open",
-"estimated_closing_time": "October",
-"estimated_opening_time": "May"
+  "name": "Location or road section name",
+  "road": "Official road number or road name",
+  "coordinates": "latitude, longitude",
+  "status": "open",
+  "estimated_closing_time": "October",
+  "estimated_opening_time": "May",
+  "source_url": "https://official-source.example"
 }
 ]
 }
