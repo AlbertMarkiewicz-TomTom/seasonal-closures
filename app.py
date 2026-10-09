@@ -350,30 +350,30 @@ with map_tab:
             status = str(r.get("current_status", "")).lower()
             color = MAP_STATUS_COLORS.get(status, "#999999")
 
-        popup = (
-            f"<b>{r.get('name', '')}</b><br>"
-            f"Road: {r.get('road', '')}<br>"
-            f"Status: {status}<br>"
-            f"Coordinates: {r['lat']:.6f}, {r['lon']:.6f}<br>"
-            f'<a href="{r.get("source_url","")}" target="_blank">Source</a>'
-        )
+            popup = (
+                f"<b>{r.get('name', '')}</b><br>"
+                f"Road: {r.get('road', '')}<br>"
+                f"Status: {status}<br>"
+                f"Coordinates: {r['lat']:.6f}, {r['lon']:.6f}<br>"
+                f'<a href="{r.get("source_url","")}" target="_blank">Source</a>'
+            )
 
-        folium.CircleMarker(
-            location=[r["lat"], r["lon"]],
-            radius=8,
-            color="black",
-            weight=2,
-            fill=True,
-            fill_color=color,
-            fill_opacity=0.75,
-            popup=popup,
-        ).add_to(m)
+            folium.CircleMarker(
+                location=[r["lat"], r["lon"]],
+                radius=8,
+                color="black",
+                weight=2,
+                fill=True,
+                fill_color=color,
+                fill_opacity=0.75,
+                popup=popup,
+            ).add_to(m)
 
         st_folium(m, width="100%", height=650)
     else:
         st.warning("No valid coordinates available for the selected records.")
 
-        st.data_editor(
+    st.data_editor(
         filtered,
         use_container_width=True,
         disabled=True,
@@ -512,7 +512,20 @@ with overview_tab:
     ]
 
     st.metric("Roads closed", len(roads_closed))
-    st.dataframe(roads_closed, use_container_width=True)
+
+    st.data_editor(
+    roads_closed,
+    use_container_width=True,
+    disabled=True,
+    hide_index=True,
+    column_config={
+        "source_url": st.column_config.LinkColumn(
+            "Source",
+            help="Open source website",
+            display_text="Open"
+        )
+    }
+)
 
 with stats_tab:
     ranking = filtered.copy()
