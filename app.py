@@ -350,13 +350,13 @@ with map_tab:
             status = str(r.get("current_status", "")).lower()
             color = MAP_STATUS_COLORS.get(status, "#999999")
 
-           popup = (
+        popup = (
             f"<b>{r.get('name', '')}</b><br>"
             f"Road: {r.get('road', '')}<br>"
             f"Status: {status}<br>"
             f"Coordinates: {r['lat']:.6f}, {r['lon']:.6f}<br>"
             f'<a href="{r.get("source_url","")}" target="_blank">Source</a>'
-            )
+        )
 
             folium.CircleMarker(
                 location=[r["lat"], r["lon"]],
