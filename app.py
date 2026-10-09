@@ -358,16 +358,16 @@ with map_tab:
             f'<a href="{r.get("source_url","")}" target="_blank">Source</a>'
         )
 
-            folium.CircleMarker(
-                location=[r["lat"], r["lon"]],
-                radius=8,
-                color="black",
-                weight=2,
-                fill=True,
-                fill_color=color,
-                fill_opacity=0.75,
-                popup=popup,
-            ).add_to(m)
+        folium.CircleMarker(
+            location=[r["lat"], r["lon"]],
+            radius=8,
+            color="black",
+            weight=2,
+            fill=True,
+            fill_color=color,
+            fill_opacity=0.75,
+            popup=popup,
+        ).add_to(m)
 
         st_folium(m, width="100%", height=650)
     else:
