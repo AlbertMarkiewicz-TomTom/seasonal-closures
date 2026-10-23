@@ -124,7 +124,7 @@ Follow these data rules exactly:
 - "estimated_closing_time"
 - "estimated_opening_time"
 - "source_url"
-4. Do not add fields such as "note", "source", "country", "region", "id", or "description".
+4. Do not add fields such as "note", "country", "region", "id", or "description".
 5. All field names and values must be written in English, except official place names and official road names.
 6. Coordinates must use the format:
 "latitude, longitude"
