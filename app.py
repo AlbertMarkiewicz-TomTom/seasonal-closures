@@ -241,14 +241,24 @@ if df.empty:
     st.warning("The uploaded JSON file does not contain any records.")
     st.stop()
 
+# Always create coordinate columns
+df["lat"] = pd.NA
+df["lon"] = pd.NA
+
 if "coordinates" in df.columns:
-    coords = df["coordinates"].astype(str).str.split(",", expand=True)
-    if len(coords.columns) >= 2:
-        df["lat"] = pd.to_numeric(coords[0].str.strip(), errors="coerce")
-        df["lon"] = pd.to_numeric(coords[1].str.strip(), errors="coerce")
-else:
-    df["lat"] = pd.NA
-    df["lon"] = pd.NA
+    coords = df["coordinates"].astype("string").str.split(",", n=1, expand=True)
+
+    if coords.shape[1] >= 1:
+        df["lat"] = pd.to_numeric(
+            coords[0].str.strip(),
+            errors="coerce"
+        )
+
+    if coords.shape[1] >= 2:
+        df["lon"] = pd.to_numeric(
+            coords[1].str.strip(),
+            errors="coerce"
+        )
 
 search_text = st.sidebar.text_input("Search road/location")
 
